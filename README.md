@@ -1,7 +1,7 @@
 # Library-Management-with-Flask
-Library Management Website using Flask
+***Library Management Website using Flask***
 
-### The Fundamental Idea of this project is:
+### # The Fundamental Idea of this project is:
 - **A member has very few privileges to do:**
   - A member has access to viewing the book details and the currently available book. 
   - Members can also change the password of their account.
@@ -13,9 +13,9 @@ Library Management Website using Flask
   - can delete and add book copies as well as books.
   - can change the password of their account as well as any member's account.
 
-### Here ***SQLite*** database is used for simplicity.
+### # Here ***SQLite*** database is used for simplicity.
 
-### Please visit the [admin_member_files](https://github.com/SrtSaa/Library-Management-with-Flask/tree/master/admin_member_files) directory.
+### # Please visit the [admin_member_files](https://github.com/SrtSaa/Library-Management-with-Flask/tree/master/admin_member_files) directory.
 - Here four files are present:
   - [student.txt](https://github.com/SrtSaa/Library-Management-with-Flask/blob/master/admin_member_files/student.txt) 
   contains all the registered students of the institute.
