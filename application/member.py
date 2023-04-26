@@ -104,5 +104,6 @@ def update_Profile(code):
         member.password = request.form['fpass']
         db.session.add(member)
         db.session.commit()
-        code = member.m_id+request.form['fpass']
+        # code = member.m_id+request.form['fpass']
+        code = member.m_id+encode(request.form['fpass'])
         return redirect("/Member/"+code+"/Profile")

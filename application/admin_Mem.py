@@ -150,13 +150,7 @@ def remove_member(code,MID,m):
     if not match(code):
         return redirect("unknown")
 
-    # l = extract_member(m)
-    # borrow = B_Issue.query.filter_by(m_id=MID).first()
-    # if borrow:
-    #     return render_template("members.html",code = code,members=l,m=m,f=1,id=MID)
     mem = mem = Member.query.get(MID)
-    # if mem.fine != 0:
-    #     return render_template("members.html",code = code,members=l,m=m,f=2,id=MID)
     db.session.delete(mem)
     db.session.commit()
     if m==0:

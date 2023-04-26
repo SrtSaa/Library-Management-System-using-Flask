@@ -33,5 +33,6 @@ def update_profile(code):
         admin.password = request.form['fpass']
         db.session.add(admin)
         db.session.commit()
-        code = admin.a_id+request.form['fpass']
+        # code = admin.a_id+request.form['fpass']
+        code = admin.a_id+encode(request.form['fpass'])
         return redirect("/Admin/"+code+"/Profile")

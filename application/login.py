@@ -24,7 +24,8 @@ def home():
                 if present.password != request.form["fpass"]:
                     return render_template("index.html",AE=request.form["femail"],AP=request.form["fpass"],UE=UE,UP=UP,data=1)
                 else:
-                    return redirect("/Admin/"+present.a_id+present.password+"/Dashboard")
+                    # return redirect("/Admin/"+present.a_id+present.password+"/Dashboard")
+                    return redirect("/Admin/"+present.a_id+encode(present.password)+"/Dashboard")
             
             else:
                 return render_template("index.html",AE=request.form["femail"],AP=request.form["fpass"],UE=UE,UP=UP,data=0)
@@ -34,26 +35,32 @@ def home():
             email = request.form["femail"]
             type = request.form["ftype"]
             pw = request.form["fpass"]
-
+            
             if type=='Student':
                 r=0
             else:
                 r=1
-
+            
             present = Member.query.filter_by(email = email).first()
             
             if present:
-                if present.password != pw:
+                if r==0 and present.type != 'Student':
+                    return render_template("index.html",UE=request.form["femail"],UP=request.form["fpass"],AE=AE,AP=AP,data2=0,r=r)
+                elif r==1 and present.type != 'Faculty':
+                    return render_template("index.html",UE=request.form["femail"],UP=request.form["fpass"],AE=AE,AP=AP,data2=0,r=r)
+
+                elif present.password != pw:
                     return render_template("index.html",UE=request.form["femail"],UP=request.form["fpass"],AE=AE,AP=AP,data2=1,r=r)
                 else:
-                    return redirect("/Member/"+present.m_id+present.password+"/Dashboard")
-            
+                    # return redirect("/Member/"+present.m_id+present.password+"/Dashboard")
+                    return redirect("/Member/"+present.m_id+encode(present.password)+"/Dashboard")
+                
             else:
                 if r==0:
                     user = Student.query.filter_by(email = email).first()
                 else:
                     user = Faculty.query.filter_by(email = email).first()
-
+                
                 if user:
                     return render_template("index.html",UE=request.form["femail"],UP=request.form["fpass"],AE=AE,AP=AP,data2=2,r=r)
                 else:
