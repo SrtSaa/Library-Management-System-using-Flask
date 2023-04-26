@@ -10,6 +10,7 @@ db.init_app(app)
 app.app_context().push()
 
 
+
 # from controllers import *
 from application.login import *
 from application.admin_Mem import *
@@ -19,7 +20,7 @@ from application.member import *
 
 
 
+
 if __name__ == '__main__':
     # app.run(debug=True)
     app.run(debug=False,host="0.0.0.0")
-
