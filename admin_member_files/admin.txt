@@ -1,1 +1,4 @@
-A001	Srt	Saa	M	2000-2-29	1234567890	abc@try.com	Abcdef@1
+a_id    f_name  l_name  gender  dob         mobile      email               password
+A001	Rajib	Ghosh	M	    1990-01-10	1234567890	rajib56@gmail.com	Abcdef@1
+A002	Subir	Sarkar	M	    1992-11-27	6214780289	subir43@gmail.com	Dde@94!g
+A003	Pritha	De	    F	    1989-06-14	6828102475	pritha15@gmail.com	$34kldf#
