@@ -24,4 +24,4 @@ Library Management Website using Flask
   - Details of the admin of the portal are conferred at [admin.txt](https://github.com/SrtSaa/Library-Management-with-Flask/blob/master/admin_member_files/admin.txt).
   - All the registered members are given in [member.txt](https://github.com/SrtSaa/Library-Management-with-Flask/blob/master/admin_member_files/member.txt).
 - Note, only a valid student or faculty of an institute can only be a library member. And there is no option to register a new admin as only an administrator can decide who could be an admin.
-- ***For a better view of these text files, please set the indent size to 4.***.
+- ***For a better view of these text files, please set the indent size to 4.***
