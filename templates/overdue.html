@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overdue Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+
+</head>
+<body>
+    <div class="center"><h1>Overdue Books</h1></div>
+    <div class="center">
+        <table class="table" style="font-size: 17px;">
+            <thead>
+                <th>Sl No</th>
+                <th>B_ID</th>
+                <th>Book Name</th>
+                <th>Date of Issue</th>
+                <th>Date of Return</th>
+                <th>M_ID</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                {% for issue in issues %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ issue.b_id }}</td>
+                        <td>{{ names[loop.index - 1] }}</td>
+                        <td>{{ issue.doi }}</td>
+                        <td>{{ issue.dor }}</td>
+                        <td>{{ issue.m_id }}</td>
+                        <form action="/Admin/{{ code }}/Books/overdue" method="POST">
+                            <input type="hidden" name="mid" value="{{ issue.m_id }}">
+                            <td><button class="btn2" type="submit">View Details</button></td>
+                        </form>
+                    </tr>
+                {% endfor %}    
+            </tbody>
+        </table>
+    </div>
+    <div class="center" style="margin-top: 7%;"><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Dashboard'">Go Back</button></div>
+</body>
+</html>

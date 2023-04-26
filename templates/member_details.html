@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memeber: {{member.m_id}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <style>
+        h1 {
+            text-align: center;
+            margin: 3%;
+        }
+        h3 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Member Details</h1>
+    <div class="center">
+        <table class="table">
+            <thead></thead>
+            <tbody>
+                <tr>
+                    <td><strong>M_ID</strong></td><td>{{ member.m_id }}</td>
+                    <td><strong>Type:</strong></td><td>{{ member.type }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Name:</strong></td><td>{{ person.f_name }} {{ person.l_name }}</td>
+                    <td><strong>DOB:</strong></td><td>{{ person.dob }}</td>
+                </tr>
+                <tr><td><strong>Gender:</strong></td><td>{{ person.gender }}</td></tr>
+                <tr>
+                    <td><strong>Dept Code:</strong></td><td>{{ person.dept_code }}</td>
+                {% if f == 0 %}
+                    <td><strong>Roll:</strong></td><td>{{ person.roll }}</td></tr>
+                    <tr>
+                        <td><strong>Degree:</strong></td><td>{{ person.degree }}</td>
+                        <td><strong>Year:</strong></td><td>{{ person.year }}</td>
+                    </tr>
+                {% elif f== 1 %}
+                    <td><strong>F_ID:</strong></td><td>{{ person.f_id }}</td></tr>
+                {% endif %}
+                <tr>
+                    <td><strong>Email:</strong></td><td>{{ member.email }}</td>
+                    <td><strong>Mobile:</strong></td><td>{{ person.mobile }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Password:</strong></td>
+                    {% if k==1 %}
+                    <form action="/Admin/{{ code }}/Members/{{ member.m_id }}/{{ m }}/update" name="form" onsubmit="return validatePassword()" method="POST">
+                        <td><input type="text" name="fpass" value="{{ member.password }}"></td>
+                        <td><input type="submit" value="Save"></td>
+                        <td><div id="pass"><b><span class="formerror"></span></b></div></td>
+                    </form>
+                    {% elif k==2 %}
+                    <td>{{ member.password }}</td>
+                    {% else %}
+                        <td>{{ member.password }}</td>
+                        {% if r!=1 %}
+                            <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ member.m_id }}/{{ m }}/update'">Change</button></td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                <tr><td><strong>Max Issue Left:</strong></td><td>{{ member.max_issue_left }}</td></tr>
+                <tr>
+                    <td><strong>Fine:</strong></td><td>{{ member.fine }}</td>
+                    {% if k!=2 %}
+                        {% if member.fine>0 %}
+                            {% if r==1 %}
+                                <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ member.m_id }}/{{ isbn }}/clear_fine'">Clear Fine</button></td>
+                            {% else %}
+                                <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ member.m_id }}/{{ m }}/clear_fine'">Clear Fine</button></td>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% if titles|length>0 %}
+    <div class="center"><h3>Books issued</h3></div>
+    <div class="center">
+        <table class="table">
+            <thead>
+                <th>B_ID</th>
+                <th>Title</th>
+                <th>Date of Issue</th>
+                <th>Date of Return</th>
+            </thead>
+            <tbody>
+                {% for book in issued %}
+                <tr>
+                    <td>{{ book.b_id }}</td>
+                    <td>{{ titles[loop.index - 1] }} </td>
+                    <td>{{ book.doi }}</td>
+                    <td>{{ book.dor }}</td>
+                    {% if k!=2  %}
+                        {% if r==1 %}
+                            <td><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ member.m_id }}/{{ 21 }}/{{ book.b_id }}/submit'">Submit</button></td>
+                        {% else %}
+                            <td><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ member.m_id }}/{{ m }}/{{ book.b_id }}/submit'">Submit</button></td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>
+    {% else %}
+        {% if member.fine==0 %}
+        <div class="center" style="margin: 3%;"><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ member.m_id }}/{{ m }}/Remove'">Remove</button></div>
+        {% endif %}
+    {% endif %}
+    <div class="center" style="margin: 3%;">
+        {% if k==1 %}
+        <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ member.m_id }}/{{ m }}'">Go Back</button>
+        {% elif k==2 %}
+        <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Books/overdue'">Go Back</button>
+        {% else %}
+            {% if m==0 %}
+                <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/all'">Go Back</button>
+            {% elif m==1 %}
+                <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/student'">Go Back</button>
+            {% elif m==2 %}
+                <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/faculty'">Go Back</button>
+            {% elif r==1 %}
+                <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Books/{{ isbn }}'">Go Back</button>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+<script src="{{ url_for('static', filename='validateForm.js')}}"></script>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <style>
+        h1 {
+            text-align: center;
+            margin: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Book</h1>
+    <div class="center">
+        <form action= "/Admin/{{ code }}/Books/add" name="form" onsubmit="return validateBookinfo()" method="POST">
+            <table class="table">
+                <thead></thead>
+                <tbody>
+                {% if f==1 %}
+                    <tr>
+                        <td><strong>ISBN No.</strong></td>
+                        <td><input type="text" name="fisbn" value="{{ i }}" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="isbn"><b><span class="formerror"></span></b></div></td></tr>
+
+
+                    <tr>
+                        <td><strong>Title</strong></td>
+                        <td><input type="text" name="ftitle" value="{{ t }}" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="title"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Publisher</strong></td>
+                        <td><input type="text" name="fpub" value="{{ p }}" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="pub"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Year</strong></td>
+                        <td><input type="Number" name="fyear" min="1990" value="{{ y }}" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="year"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>First Author</strong></td>
+                        <td><input type="text" name="ffau" value="{{ fa }}" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="fau"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Second Author</strong></td>
+                        <td><input type="text" name="fsau" value="{{ s }}"></td>
+                    </tr>
+                    <tr><td></td><td></td></tr>
+
+                    <tr>
+                        <td><strong>Third Author</strong></td>
+                        <td><input type="text" name="ftau" value="{{ th }}"></td>
+                    </tr>
+                    <tr><td></td><td></td></tr>
+
+                    <tr>
+                        <td><strong>Copies</strong></td>
+                        <td><input type="number" min="5" name="fcp" value="{{ c }}" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="cp"><b><span class="formerror"></span></b></div></td></tr>
+                {% else %}
+                    <tr>
+                        <td><strong>ISBN No.</strong></td>
+                        <td><input type="text" name="fisbn" placeholder="Enter ISBN No." required></td>
+                    </tr>
+                    <tr><td></td><td><div id="isbn"><b><span class="formerror"></span></b></div></td></tr>
+
+
+                    <tr>
+                        <td><strong>Title</strong></td>
+                        <td><input type="text" name="ftitle" placeholder="Enter Title" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="title"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Publisher</strong></td>
+                        <td><input type="text" name="fpub" placeholder="Enter Publisher" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="pub"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Year</strong></td>
+                        <td><input type="Number" name="fyear" min="1990" value="1990" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="year"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>First Author</strong></td>
+                        <td><input type="text" name="ffau" placeholder="Enter First Author" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="fau"><b><span class="formerror"></span></b></div></td></tr>
+
+                    <tr>
+                        <td><strong>Second Author</strong></td>
+                        <td><input type="text" name="fsau" placeholder="Enter Second Author"></td>
+                    </tr>
+                    <tr><td></td><td></td></tr>
+
+                    <tr>
+                        <td><strong>Third Author</strong></td>
+                        <td><input type="text" name="ftau" placeholder="Enter Third Author"></td>
+                    </tr>
+                    <tr><td></td><td></td></tr>
+
+                    <tr>
+                        <td><strong>Copies</strong></td>
+                        <td><input type="number" min="5" name="fcp" value="5" placeholder="Enter Copies" required></td>
+                    </tr>
+                    <tr><td></td><td><div id="cp"><b><span class="formerror"></span></b></div></td></tr>
+                {% endif %}
+                </tbody>
+            </table>
+            <div class="center"><input style="font-size: 20px; margin: 5%;" type="submit" value="Submit"></div>
+            <div class="center formerror"></div>
+        </form>
+    </div>
+
+    <div id="test" class="center"><b><div class="formerror" style="text-align: center;"></div></b></div>
+
+    <div class="center"><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Books'">Go Back</button></div>
+</body>
+<script src="{{ url_for('static', filename='validInfo.js')}}"></script>
+{% if f == 1 %}
+    <script>seterror("test","Book already exists...<br><br>");</script>
+{% endif %}
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='search.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="box2">
+            <h1>Books</h1>
+        </div>
+
+        <div class="box2">
+            {% if a==0 %}
+            <form action="/Member/{{ code }}/Books" class="search_bar" name="search" onsubmit="return validateSearch()" method="POST">
+            {% elif a==1 %}
+            <form action="/Admin/{{ code }}/Books" class="search_bar" name="search" onsubmit="return validateSearch()" method="POST">
+            {% endif %}
+                {% if r==1 %}
+                <input type="text" value="{{ val }}" placeholder="Search Here..." name="q">
+                {% else %}
+                <input type="text" placeholder="Search Here..." name="q">
+                {% endif %}
+                <button type="submit"><img src="{{ url_for('static', filename='search.png')}}" alt="Search"></button>
+            </form>
+        </div>
+
+        <div class="box2">
+            {% if r==1 %}
+                {% if a==0 %}
+                <div><button class="btn2" onclick="window.location.href = '/Member/{{ code }}/Books'">Refresh</button></div>
+                {% elif a==1 %}
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Books'">Refresh</button></div>
+                {% endif %}
+            {% else %}
+                {% if a==0 %}
+                <div><button class="btn2" onclick="window.location.href = '/Member/{{ code }}/Dashboard'">Go Back</button></div>
+                {% elif a==1 %}
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Dashboard'">Go Back</button></div>
+                {% endif %}
+            {% endif %}
+            {% if a==1 %}
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Books/add'">Add Books</button></div>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+
+    <div class="center">  
+        <table class="table">
+            <thead>
+                <th>S. No.</th>
+                <th>ISBN No.</th>
+                <th>Title</th>
+                <th>Publisher</th>
+                <th>Authors</th>
+                <th>Actions</th>
+            </thead>
+
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ authors[loop.index - 1] }}</td>
+                    {% if a==0 %}
+                    <td><button class="btn3" onclick="window.location.href = '/Member/{{ code }}/Books/{{ book.isbn }}'">View Details</button></td>
+                    {% elif a==1 %}
+                    <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Books/{{ book.isbn }}'">View Details</button></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script src="{{ url_for('static', filename='validSearch.js')}}"></script>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% if m==0 %}
+        <title>All Member</title>
+    {% elif m==1 %}
+        <title>Student Member</title>
+    {% elif m==2 %}
+        <title>Faculty Member</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='search.css')}}">
+</head>
+<body>
+    <div class="container">
+        <div class="box2">
+            {% if m==0 %}
+                <h1>All Members</h1>
+            {% elif m==1 %}
+                <h1>Student Members</h1>
+            {% elif m==2 %}
+                <h1>Faculty Members</h1>
+            {% endif %}
+        </div>
+        <div class="box2">
+            {% if m==0 %}
+            <form action="/Admin/{{ code }}/Members/all" class="search_bar" name="search" onsubmit="return validateSearch()" method="POST">
+            {% elif m==1 %}
+            <form action="/Admin/{{ code }}/Members/student" class="search_bar" name="search" onsubmit="return validateSearch()" method="POST">
+            {% elif m==2 %}
+            <form action="/Admin/{{ code }}/Members/faculty" class="search_bar" name="search" onsubmit="return validateSearch()" method="POST">
+            {% endif %}
+                {% if r==1 %}
+                <input type="text" value="{{ val }}" placeholder="Search by Name or M_ID..." name="q">
+                {% elif m==0 or m==1 or m==2 %}
+                <input type="text" placeholder="Search by Name or M_ID..." name="q">
+                {% endif %}
+                <button type="submit"><img src="{{ url_for('static', filename='search.png')}}" alt="Search"></button>
+            </form>
+        </div>
+        <div class="box2">
+            <div>
+                <div style="display: flex;">
+                    {% if f==1 or f==2 or r==1 %}
+                        {% if m==0 %}
+                            <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/all'">Refresh</button>
+                        {% elif m==1 %}
+                            <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/student'">Refresh</button>
+                        {% elif m==2 %}
+                            <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/faculty'">Refresh</button>
+                        {% endif %}
+                    {% elif m==0 or m==1 or m==2 %}
+                        <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Dashboard'">Go Back</button>
+                    {% endif %}
+                </div>
+                <div style="display: flex;">
+                    <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/add_member'">Add Member</button>
+                </div>
+            </div>
+            {% if m==0 %}
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/student'">View Student Members</button></div>
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/faculty'">View Faculty Members</button></div>
+            {% elif m==1 %}
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/all'">View All Members</button></div>
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/faculty'">View Faculty Members</button></div>
+            {% elif m==2 %}
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/all'">View All Members</button></div>
+                <div><button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/student'">View Student Members</button></div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="center">  
+        <table class="table">
+            <thead>
+                <th>S. No.</th>
+                <th>M_ID</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Dept code</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                {% for mem in members %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ mem[0] }}</td>
+                    <td>{{ mem[1] }}</td>
+                    <td>{{ mem[2] }}</td>
+                    <td>{{ mem[3] }}</td>
+                    <td>{{ mem[4] }}</td>
+                    <td>
+                        <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Members/{{ mem[0] }}/{{ m }}'">View Details</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='validSearch.js')}}"></script>
+</html>

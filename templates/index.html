@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <style>
+        h1 {
+            margin-top: 75px;
+            text-align: center;
+            font-size: 35px;
+        }
+        h3 {
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>WELCOME</h1>
+    <div class="container">
+        <div class="box">
+            <h3 style="margin-top: 10%;">Admin Login</h3>
+            <form action="/" name="form" onsubmit="return validateForm()" method="POST">
+                <input type="hidden" name="type" value="Admin">
+                <div id="email">
+                    {% if data == 0 or data == 1 %}
+                    Email: <input type="email" name="femail" value= "{{ AE }}" required><br>
+                    {% else %}
+                    Email: <input type="email" name="femail" placeholder= "{{ AE }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+                <div id="pass">
+                    {% if data == 0 or data == 1 %}
+                    Password: <input type="text" name="fpass" value= "{{ AP }}" required><br>
+                    {% else %}
+                    Password: <input type="text" name="fpass" placeholder= "{{ AP }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+                <input type="submit" value="Submit"><br><br>
+            </form>
+            <div id="test"><b><div class="formerror" style="text-align: center;"></div></b></div>
+        </div>
+
+        <div class="box">
+            <h3>User Login</h3>
+            <form action="/" name="form2" onsubmit="return validateForm2()" method="POST">
+                <input type="hidden" name="type" value="User">
+                <div id="email2">
+                    {% if data2 == 0 or data2 == 1 or data2 == 2 %}
+                    Email: <input type="email" name="femail" value= "{{ UE }}" required><br>
+                    {% else %}
+                    Email: <input type="email" name="femail" placeholder= "{{ UE }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+                    {% if data2 == 0 or data2 == 1 or data2 == 2 %}
+                        {% if r==0 %}
+                            Type: <input type="radio" name="ftype" value="Student" checked required>Student
+                                <input type="radio" name="ftype" value="Faculty">Faculty <br><br>
+                        {% else %}
+                            Type: <input type="radio" name="ftype" value="Student" required>Student
+                                <input type="radio" name="ftype" value="Faculty" checked>Faculty <br><br>
+                        {% endif %}
+                    {% else %}
+                    Type: <input type="radio" name="ftype" value="Student" required>Student
+                    <input type="radio" name="ftype" value="Faculty">Faculty <br><br>
+                    {% endif %}
+                <div>
+
+                </div>
+                <div id="pass2">
+                    {% if data2 == 0 or data2 == 1 or data2 == 2 %}
+                    Password: <input type="text" name="fpass" value= "{{ UP }}" required><br>
+                    {% else %}
+                    Password: <input type="text" name="fpass" placeholder= "{{ UP }}" required><br>
+                    {% endif %}
+                    <b><span class="formerror"></span></b><br>
+                </div>
+                <input type="submit" value="Submit"><br><br>
+            </form>
+            <div id="test2"><b><div class="formerror" style="text-align: center;"></div></b></div>
+            <div><a href="/Add_member">New Member? Register!</a></div><br><br>
+        </div>
+    </div>
+</body>
+<script src="{{ url_for('static', filename='validateForm.js')}}"></script>
+{% if data == 0 %}
+    <script>seterror("test","Unauthorized email!");</script>
+{% elif data == 1 %}
+    <script>seterror("test","Invalid Password!");</script>
+{% endif %}
+
+{% if data2 == 0 %}
+    <script>seterror("test2","Unauthorized email!<br>");</script>
+{% elif data2 == 1 %}
+    <script>seterror("test2","Invalid Password!<br>");</script>
+{% elif data2 == 2 %}
+    <script>seterror("test2","Register as Member!<br>");</script>
+{% endif %}
+
+</html>

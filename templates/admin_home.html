@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dropdown.css')}}">
+    <style>
+        h1 {
+            text-align: center;
+            margin: 10%;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{name}}</h1>
+    <div class="container">
+        <div class="center">
+            <div class="dropdown">
+                <button class="btn">Member Section</button>
+                <div class="dropdown-content">
+                <a href="/Admin/{{ code }}/Members/all">All Members</a>
+                <a href="/Admin/{{ code }}/Members/student">Student</a>
+                <a href="/Admin/{{ code }}/Members/faculty">Faculty</a>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="dropdown">
+                <button class="btn">Books</button>
+                <div class="dropdown-content">
+                <a href="/Admin/{{ code }}/Books">View Books</a>
+                <a href="/Admin/{{ code }}/Books/overdue">View Overdue Books</a>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="dropdown">
+                <button class="btn" onclick="window.location.href = '/Admin/{{ code }}/Profile'">Profile</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="center"><button style="font-size: 15px; margin-top: 10%;" onclick="window.location.href = '/'">Sign Out</button></a></div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <style>
+        h1 {
+            text-align: center;
+            margin: 5%;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    {% if u==1 %}
+        <h1>Admin Details</h1>
+    {% elif u==2 or u==3 %}
+        <h1>Member Details</h1>
+    {% endif %}
+    <div class="center">
+        <table class="table" style="font-size: 17px;">
+            <thead></thead>
+            <tbody>
+                <tr>
+                {% if u==1 %}
+                    <td><strong>A_ID:</strong></td><td>{{ person.a_id }}</td>
+                    <td><strong>Type:</strong></td><td>Admin</td>
+                {% elif u==2 or u==3 %}
+                    <td><strong>M_ID:</strong></td><td>{{ member.m_id }}</td>
+                    <td><strong>Type:</strong></td><td>{{ member.type }}</td>
+                {% endif %}
+                </tr>
+                <tr>
+                    <td><strong>First Name</strong></td><td>{{ person.f_name }}</td>
+                    <td><strong>Last Name</strong></td><td>{{ person.l_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Gender</strong></td><td>{{ person.gender }}</td>
+                    <td><strong>DOB</strong></td><td>{{ person.dob }}</td>
+                </tr>
+                {% if u==2 or u==3 %}
+                <tr>
+                    <td><strong>Dept Code:</strong></td><td>{{ person.dept_code }}</td>
+                    {% if u == 2 %}
+                        <td><strong>Roll:</strong></td><td>{{ person.roll }}</td></tr>
+                        <tr>
+                            <td><strong>Degree:</strong></td><td>{{ person.degree }}</td>
+                            <td><strong>Year:</strong></td><td>{{ person.year }}</td>
+                        </tr>
+                    {% elif u==3 %}
+                        <td><strong>F_ID:</strong></td><td>{{ person.f_id }}</td></tr>
+                    {% endif %}
+                <tr>
+                {% endif %}
+                <tr>
+                    <td><strong>Email:</strong></td><td>{{ person.email }}</td>
+                    <td><strong>Mobile:</strong></td><td>{{ person.mobile }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Password:</strong></td>
+                    {% if e==1 %}
+                        {% if u == 1 %}
+                            <form action="/Admin/{{ code }}/Profile/update" name="form" onsubmit="return validatePassword()" method="POST">
+                            <td><input type="text" name="fpass" value="{{ person.password }}"></td>
+                        {% elif u==2 or u==3 %}
+                            <form action= "/Member/{{ code }}/Profile/update" name="form" onsubmit="return validatePassword()" method="POST">
+                            <td><input type="text" name="fpass" value="{{ member.password }}"></td>
+                        {% endif %}
+                        <td><input type="submit" value="Save"></td>
+                        <td><div id="pass"><b><span class="formerror"></span></b></div></td>
+                    </form>
+                    {% else %}
+                        {% if u == 1 %}
+                            <td>{{ person.password }}</td>
+                            <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Profile/update'">Change</button></td>
+                        {% elif u==2 or u==3 %}
+                            <td>{{ member.password }}</td>
+                            <td><button class="btn3" onclick="window.location.href = '/Member/{{ code }}/Profile/update'">Change</button></td>
+                        {% endif %}
+                    {% endif %}
+                </tr>
+                {% if u==2 or u==3 %}
+                <tr>
+                    <td><strong>Max Issue Left:</strong></td><td>{{ member.max_issue_left }}</td>
+                    <td><strong>Fine:</strong></td><td>{{ member.fine }}</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if u==2 or u==3 %}
+        {% if titles|length>0 %}
+            <div class="center"><h3>Books issued</h3></div>
+            <div class="center">
+                <table class="table" style="font-size: 17px;">
+                    <thead>
+                        <th>B_ID</th>
+                        <th>Title</th>
+                        <th>Date of Issue</th>
+                        <th>Date of Return</th>
+                    </thead>
+                    <tbody>
+                        {% for book in issued %}
+                        <tr>
+                            <td>{{ book.b_id }}</td>
+                            <td>{{ titles[loop.index - 1] }} </td>
+                            <td>{{ book.doi }}</td>
+                            <td>{{ book.dor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>  
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <div class="center" style="margin: 3%;">
+        {% if e==1 %}
+            {% if u==1 %}
+                <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Profile'">Go Back</button>
+            {% elif u==2 or u==3 %}
+                <button class="btn2" onclick="window.location.href = '/Member/{{ code }}/Profile'">Go Back</button>
+            {% endif %}
+        {% else %}
+            {% if u==1 %}
+                <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Dashboard'">Go Back</button>
+            {% elif u==2 or u==3 %}
+                <button class="btn2" onclick="window.location.href = '/Member/{{ code }}/Dashboard'">Go Back</button>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+
+</body>
+<script src="{{ url_for('static', filename='validateForm.js')}}"></script>
+</html>

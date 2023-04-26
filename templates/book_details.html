@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details: {{ book.isbn }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basic.css')}}">
+    <style>
+        h1 {
+            text-align: center;
+            margin: 3%;
+        }
+        h3 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Member Details</h1>
+    <div class="center">
+
+        <table class="table">
+            <thead></thead>
+
+            <tbody>
+                <tr><td><strong>ISBN No:</strong></td><td>{{ book.isbn }}</td></tr>
+
+                <tr><td><strong>Title:</strong></td><td>{{ book.title }}</td></tr>
+                
+                <tr><td><strong>Publisher:</strong></td><td>{{ book.publisher }}</td>
+                    <td><strong>Year:</strong></td><td>{{ book.year }}</td>
+                </tr>
+                
+                <tr><td><strong>First Author:</strong></td><td>{{ book.f_author }}</td></tr>
+                {% if book.s_author==None %}
+                    <tr><td><strong>Second Author:</strong></td><td>{{ book.s_author }}</td></tr>
+                    {% if book.t_author==None %}
+                        <tr><td><strong>Third Author:</strong></td><td>{{ book.t_author }}</td></tr>
+                    {% endif %}
+                {% endif %}
+
+                {% if a==1 %}
+                    <tr>
+                        <td><strong>No. of copies:</strong></td>
+                        <td>{{ book.copies }}</td>
+                        <form action="/Admin/{{ code }}/Book/add_copies" method="POST">
+                            <input type="hidden" name="isbn" value="{{ book.isbn }}">
+                            <input type="hidden" name="k" value="{{ 1 }}">
+                            <td><button class="btn3" type="submit">Add Copies</button></td>
+                        </form>
+                    </tr>
+                {% elif a==0 %}
+                    <tr><td><strong>No. of copies:</strong></td><td>{{ book.copies }}</td></tr>
+                    {% endif %}
+                    
+                {% if a==8 %}
+                    <tr><td><strong>No. of copies:</strong></td><td>{{ book.copies }}</td></tr>
+                    <tr>
+                        <td></td>
+                        <form action="/Admin/{{ code }}/Book/add_copies" name="form" onsubmit="return validateBcpy()" method="POST">
+                            <input type="hidden" name="isbn" value="{{ book.isbn }}">
+                            <input type="hidden" name="k" value="{{ 2 }}">
+                            <input type="hidden" name="cpy" value="{{ book.copies }}">
+                            <td><input type="number" min="0" name="fcp" value="0"></td>
+                            <td><input type="submit" value="Add"></td>
+                        </form>
+                    </tr>
+                    <tr><td></td><td><div id="cp"><b><span class="formerror"></span></b></div></td></tr>
+                {% endif %}
+
+                {% if a==9 %}
+                    <tr>
+                        <td></td>
+                        <td style="color: red;"><b>*For now one book may have maximum 26 copies</b></td>
+                    </tr>
+                {% endif %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+    {% if copies|length>0 %}
+    <div class="center"><h3>Book's copies</h3></div>
+
+    <div class="center">
+
+        <table class="table">
+            <thead>
+                <th>B_ID</th>
+                <th>Assigned</th>
+                {% if a==1 %}
+                    <th>Actions</th>
+                {% endif %}
+            </thead>
+
+            <tbody>
+                {% for copy in copies %}
+                <tr>
+                    <td>{{ copy.b_id }}</td>
+
+                    {% if copy.assigned == 'Yes' %}
+                        <td>{{ mids[loop.index-1] }}</td>
+                        {% if a==1 %}
+                            <form action="/Admin/{{ code }}/Members/book/submit" method="POST">
+                                <input type="hidden" name="MID" value="{{ mids[loop.index-1] }}">
+                                <input type="hidden" name="x" value="{{ 1 }}">
+                                <input type="hidden" name="BID" value="{{ copy.b_id }}">
+                                <td><button class="btn2" type="submit">Submit</button></td>
+                            </form>
+                        {% endif %}
+
+
+                    {% else %}
+                        {% if a==0 %}
+                            <td>{{ mids[loop.index-1] }}</td>
+                        {% elif a==1 %}
+                            <td>{{ mids[loop.index-1] }}</td>
+                            <form action="/Admin/{{ code }}/Book/assign" method="POST">
+                                <input type="hidden" name="isbn" value="{{ book.isbn }}">
+                                <input type="hidden" name="bid" value="{{ copy.b_id }}">
+                                <input type="hidden" name="k" value="{{ 1 }}">
+                                <td><button class="btn2" type="submit">Assign</button></td>
+                            </form>
+                            <form action="/Admin/{{ code }}/Book/copy/remove" method="POST">
+                                <input type="hidden" name="bid" value="{{ copy.b_id }}">
+                                <td><button class="btn2" type="submit">Remove</button></td>
+                            </form>
+
+                        {% elif a==2 and bid==copy.b_id %}
+                            <form action="/Admin/{{ code }}/Book/assign" method="POST">
+                                <input type="hidden" name="isbn" value="{{ book.isbn }}">
+                                <input type="hidden" name="bid" value="{{ copy.b_id }}">
+                                <input type="hidden" name="k" value="{{ 2 }}">
+                                <td><input type="text" name="mid" placeholder="Enter M_ID"></td>
+                                <td><input type="submit" value="Assign"></td>
+                            </form>
+
+                        {% elif a>=3 and bid==copy.b_id %}
+                            <form action="/Admin/{{ code }}/Book/assign" method="POST">
+                                <input type="hidden" name="isbn" value="{{ book.isbn }}">
+                                <input type="hidden" name="bid" value="{{ copy.b_id }}">
+                                <input type="hidden" name="k" value="{{ 2 }}">
+                                <td><input type="text" name="mid" value="{{ mid }}"></td>
+                                <td><input type="submit" value="Assign"></td>
+                            </form>
+                            {% if a==3 %}
+                                <tr><td></td><td style="color: red;"><b>*Invalid Member ID!</b></td></tr>
+    
+                            {% elif a==4 %}
+                                <tr>
+                                    <td></td>
+                                    <td style="color: red;"><b>*Having Overdue Books!</b></td>
+                                    <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Books/{{ book.isbn }}/assign/Members/{{ mid }}'">View</button></td>
+                                </tr>
+    
+                            {% elif a==5 %}
+                                <tr>
+                                    <td></td>
+                                    <td style="color: red;"><b>*Having Fines!</b></td>
+                                    <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Books/{{ book.isbn }}/assign/Members/{{ mid }}'">View</button></td>
+                                </tr>
+                            
+                            {% elif a==6 %}
+                                <tr><td></td><td style="color: red;"><b>*Having Same Book!</b></td></tr>
+                            
+                            {% elif a==7 %}
+                                <tr>
+                                    <td></td>
+                                    <td style="color: red;"><b>*Already occupied max allotted book!</b></td>
+                                    <td><button class="btn3" onclick="window.location.href = '/Admin/{{ code }}/Books/{{ book.isbn }}/assign/Members/{{ mid }}'">View</button></td>
+                                </tr>
+                            {% endif %}
+                        
+                        {% endif %}
+
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>  
+    </div>
+    {% else %}
+    <div class="center" style="margin: 3%;">
+        {% if a==1 %}
+            <form action="/Admin/{{ code }}/Book/remove" method="POST">
+                <input type="hidden" name="isbn" value="{{ book.isbn }}">
+                <button class="btn2" type="submit">Remove Book</button>
+            </form>
+        {% endif %}
+    </div>
+    {% endif %}
+
+
+    <div class="center" style="margin: 3%;">
+        {% if a==0 %}
+            <button class="btn2" onclick="window.location.href = '/Member/{{ code }}/Books'">Go Back</button>
+        {% elif a==1 %}
+            <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Books'">Go Back</button>
+        {% elif a>=2 %}
+            <button class="btn2" onclick="window.location.href = '/Admin/{{ code }}/Books/{{ book.isbn }}'">Go Back</button>
+        {% endif %}
+    </div>
+</body>
+<script src="{{ url_for('static', filename='validBcpy.js')}}"></script>
+</html>

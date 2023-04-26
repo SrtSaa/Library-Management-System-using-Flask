@@ -1,0 +1,11 @@
+roll        f_name      l_name          gender  dob         mobile      dept_code   email
+CSE0070	    Souvik	    Das	            M	    1999-8-14	6901992762	CSE	        Souvik92@gmail.com
+IT0016	    Arka	    Mukherjee	    M	    1999-12-13	9631989951	IT	        Arka96@gmail.com
+CE0072	    Amrita	    Bhattacharjee	F	    1999-5-16	7819110124	CE	        Amrita15@gmail.com
+CSE0057	    Samadrita	Mazumder	    F	    1999-6-13	7932350268	CSE	        Samadrita57@gmail.com
+IT0079	    Gaurav	    Banerjee	    M	    2003-3-23	7809880347	ECE	        Gaurav93@gmail.com
+IT0032	    Manas	    Das	            M	    1998-7-24	6286727971	IT	        Manas91@gmail.com
+CE0014	    Arita	    Goswami	        F	    1998-7-12	6547037256	ECE	        Arita44@gmail.com
+EE0024	    Sharanya	Dey	            F	    1999-5-24	6855176887	EE	        Sharanya10@gmail.com
+CSE0022	    Swarmili	Basak	        F	    2001-12-26	6357130556	CSE	        Swarmili76@gmail.com
+ME0073	    Subhodip	Mondal	        M	    2000-5-17	6342109814	ME	        Subhodip30@gmail.com
