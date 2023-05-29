@@ -87,3 +87,4 @@ class B_Issue(db.Model):
     dor = db.Column(db.String, nullable=False)
 
 
+
