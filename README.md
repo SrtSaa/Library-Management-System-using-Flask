@@ -4,16 +4,17 @@
 ### # The Fundamental Idea of this project is:
 - **A member has very few privileges to do:**
   - A member has access to viewing the book details and the currently available book. 
+  - A member can view own profile.
   - Members can also change the password of their account.
 - **An admin has more functionalities:**
-  - An admin can view all members as well as all details.
+  - An admin can view all members as well as their all details.
   - can remove the privilege of a member.
   - can view all book details.
   - can assign or submit any book copy.
   - can delete and add book copies as well as books.
   - can change the password of their account as well as any member's account.
 
-### # Here ***SQLite*** database is used for simplicity.
+### # Here ***SQLite*** database is used.
 
 ### # Please visit the [admin_member_files](https://github.com/SrtSaa/Library-Management-with-Flask/tree/master/admin_member_files) directory.
 - Here four files are present:
