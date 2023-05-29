@@ -169,7 +169,7 @@ def extract_book2(q):
     sbooks = []
     books = Book.query.all()
     for book in books:
-        if q in book.isbn or q in book.title:
+        if q in book.isbn or q.lower() in book.title.lower():
             sbooks.append(book)
             continue
 

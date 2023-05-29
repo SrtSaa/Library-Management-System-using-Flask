@@ -102,6 +102,9 @@ function validateForm(){
     var returnval = true;
     clearErrors();
     returnval = validateEmail();
+    if (returnval == false) {
+        return returnval;
+    }
     returnval = validatePassword();
     return returnval;
 }
@@ -111,6 +114,9 @@ function validateForm2(){
     var returnval = true;
     clearErrors();
     returnval = validateEmail2();
+    if (returnval == false) {
+        return returnval;
+    }
     returnval = validatePassword2();
     return returnval;
 }
@@ -120,7 +126,13 @@ function validateForm3(){
     var returnval = true;
     clearErrors();
     returnval = validateEmail();
+    if (returnval == false) {
+        return returnval;
+    }
     returnval = validatePassword();
+    if (returnval == false) {
+        return returnval;
+    }
     returnval = validateConfirmPassword();
     return returnval;
 }

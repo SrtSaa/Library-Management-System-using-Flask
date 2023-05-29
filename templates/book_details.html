@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <h1>Member Details</h1>
+    <h1>Book Details</h1>
     <div class="center">
 
         <table class="table">
@@ -34,9 +34,9 @@
                 </tr>
                 
                 <tr><td><strong>First Author:</strong></td><td>{{ book.f_author }}</td></tr>
-                {% if book.s_author==None %}
+                {% if book.s_author!=None %}
                     <tr><td><strong>Second Author:</strong></td><td>{{ book.s_author }}</td></tr>
-                    {% if book.t_author==None %}
+                    {% if book.t_author!=None %}
                         <tr><td><strong>Third Author:</strong></td><td>{{ book.t_author }}</td></tr>
                     {% endif %}
                 {% endif %}
