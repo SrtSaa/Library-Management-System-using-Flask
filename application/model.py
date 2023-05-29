@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+
 class Admin(db.Model):
     __tablename__ = 'admin'
     a_id = db.Column(db.String, primary_key=True, unique=True, nullable=False)
@@ -84,3 +85,5 @@ class B_Issue(db.Model):
     b_id = db.Column(db.String, db.ForeignKey("book_copies.b_id"), primary_key=True, nullable=False)
     doi = db.Column(db.String, nullable=False)
     dor = db.Column(db.String, nullable=False)
+
+

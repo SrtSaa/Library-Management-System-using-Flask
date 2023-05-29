@@ -107,3 +107,5 @@ def update_Profile(code):
         # code = member.m_id+request.form['fpass']
         code = member.m_id+encode(request.form['fpass'])
         return redirect("/Member/"+code+"/Profile")
+
+

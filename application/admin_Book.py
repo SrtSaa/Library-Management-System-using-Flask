@@ -322,3 +322,6 @@ def overdue(code):
         else:
             per = Faculty.query.filter_by(f_id=member.f_id).first()
             return render_template("member_details.html",code=code,member=member,person=per,titles=titles,issued=issued,f=1,k=2)
+
+
+
