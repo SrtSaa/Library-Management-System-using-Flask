@@ -1,0 +1,60 @@
+Computer Fundamentals and Programming in C
+Nature of computation
+Big data analytics: tools and technology for effective planning
+Computer Science Essentials
+Computational Thinking and Problem Solving
+Operating Systems
+Introduction to Embedded Systems
+Data Structures & Algorithms
+Design and Analysis of Algorithms
+Digital Systems
+Discrete Mathematics
+Object-Oriented Programming
+Fundamentals of Electrical and Electronics Engineering
+Engg.Drawing- CAD
+Communicative English
+Computer Networks
+Computer Organization and Architecture
+Database Management Systems
+Environmental Studies
+Software Engineering
+Theory of Computation
+Machine Learning and  Data Mining
+Software Project Management
+Structure and Interpretation of Computer Programs
+Project-Based Elective
+Parallel Computing: Accelerating Computational Science and Engineering
+Object-Oriented Analysis and Design 
+Fundamentals of Computer Science Engineering for RGPV
+Computer and Information Science
+Formal Methods and Software Development.
+Theory and Practice of Software Development
+Advances in Computer Science
+Computer Graphics
+Revolution in the Valley 
+Deep Learning for Computer Architects
+Software and Hardware Problems
+Modern Processor Design: Fundamentals of Superscalar Processors
+A Programmer’s Perspective
+Structured Computer Organization
+Introduction to Algorithms
+Programming in ANSI C
+Data Structure
+Computer Organization
+Compilers: Principles, Techniques, and Tools
+Data Communications and Networking (McGraw Hill Education)
+Introduction to HTML
+Java
+Python
+Introduction to C++
+Introduction to C#
+Introduction to SQL
+Cryptography And Network Security
+Operating System Concepts
+Introduction to Ruby
+Artificial Inteligence
+Fundamentals of Software Engineering
+Principles of Soft Computing
+Artificial Intelligence
+Introduction to PHP
+Pattern Recognition
